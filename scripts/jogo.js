@@ -11,7 +11,8 @@ const flappyBird = {
   altura: 24,
   x: 10,
   y: 50,
-  gravity: 0.7,
+  velocidade: 0,
+  gravity: 0.25,
   draw() {
     ctx.drawImage(
       spritesheet, //image
@@ -25,9 +26,10 @@ const flappyBird = {
       this.altura //tamanho da imagem a printar
     )
   },
-  move() {
+  atualiza() {
     if (this.y + this.altura < canvas.height) {
-      this.y += this.gravity
+      this.velocidade += this.gravity
+      this.y += this.velocidade
     }
   },
   pula() {
@@ -36,6 +38,7 @@ const flappyBird = {
     })
   }
 }
+
 //chao
 const chao = {
   spriteX: 0,
@@ -69,6 +72,7 @@ const chao = {
     )
   }
 }
+
 //fundo
 const fundo = {
   spriteX: 390,
@@ -111,7 +115,7 @@ function loop() {
   fundo.draw()
   chao.draw()
   flappyBird.draw()
-  // flappyBird.move()
+  flappyBird.atualiza()
 
   requestAnimationFrame(loop)
 }
